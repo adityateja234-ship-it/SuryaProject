@@ -1,0 +1,16 @@
+<!-- This is used as a page on the Site to display -->
+<!-- the organization's twitter feed.              -->
+<apex:page showHeader="false" 
+    sidebar="false"   
+    lightningStylesheets="true" >
+    <a class="twitter-timeline"
+        data-height="1000" 
+        href="https://twitter.com/openexc?ref_src=twsrc%5Etfw">
+        Twitter Feed for OpenExchange
+    </a> 
+    <script
+        src="https://platform.twitter.com/widgets.js"
+        charset="utf-8" 
+        async="true">
+    </script>
+</apex:page>

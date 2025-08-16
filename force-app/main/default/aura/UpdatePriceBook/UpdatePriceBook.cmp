@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller = "UpdatePriceBookController" >
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="errorMsg" type="String"  default=""/>
+    <aura:attribute name="status" type="String" />
+    <aura:attribute name="showPriceBookUpdate" type="Boolean" default = "False" />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Update PriceBook</h2>
+     </header>
+    <lightning:spinner aura:id="Spinner" alternativeText="This might take some time" size="medium" variant="brand" class="slds-hide slds-is-fixed"/>
+    <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1">
+        <aura:if isTrue = "{!v.errorMsg}"> 
+            {!v.errorMsg}
+        </aura:if>
+        <aura:if isTrue = "{!v.showPriceBookUpdate}"> 
+        <lightning:recordEditForm  objectApiName="Order">
+        <lightning:inputField fieldName="Pricebook2Id" aura:id="priceBookId" />
+            <p>Note: Order products will be deleted, when we update the pricebook.</p>
+    	</lightning:recordEditForm>
+            <aura:set attribute = "else">
+                <p>pricebook cannot be updated, when the order status is other than New/In Progress/Delivered.</p>
+            </aura:set>
+            </aura:if>
+    </div>
+    <footer class="slds-modal__footer">
+      <lightning:button class="slds-m-top_small" variant="neutral" type="button" name="Cancel" label="Cancel" onclick="{!c.backtoOrder}" />
+        <aura:if isTrue = "{!v.showPriceBookUpdate}"> 
+      <lightning:button class="slds-m-top_small" variant="neutral" type="button" name="Save" label="Save" onclick="{!c.updatePricebook}"/>
+        </aura:if>
+    </footer>
+</aura:component>
